@@ -13,11 +13,12 @@
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">Your Sky Bill</span>
+                   
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Your Sky Bill</a>
+                <a class="navbar-brand" href="#">Your Sky Bill<img style="width:30%;height:30%;" src="http://ktvservices.com/wp-content/uploads/2013/09/Sky-logo-2012-lrg.jpg" /></a>
             </div>
         </div>
 </nav>
@@ -25,71 +26,74 @@
         <h4 class="info">Period : {{formatDate(Bill.Statement.Period.From)}} - {{formatDate(Bill.Statement.Period.To)}}</h4>
         <h6>Date Generated : {{formatDate(Bill.Statement.Generated)}}</h6>
         <h4>Total : {{Bill.Total}}</h4>
-        <p>Breakdown</p>
-        <span class="bg-info">Packages</span>
-        <table class="table" id="packages">
-            <tr>
-                <th>Type</th>
-                <th>Name</th>
-                <th>Cost</th>
-            </tr>
-            <tr ng-repeat="subscription in  Bill.Package.Subscriptions">
-                <td>{{subscription.Type}}</td>
-                <td>{{subscription.Name}}</td>
-                <td>{{subscription.Cost}}</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td class="text-info">Total : {{Bill.Package.Total}}</td>
-            </tr>
-        </table>
-        <span class="bg-info">Call Charges</span>
-        <table class="table" id="Call Charges">
-            <tr>
-                <th>Called</th>
-                <th>Duration</th>
-                <th>Cost</th>
-            </tr>
-            <tr ng-repeat="call in  Bill.CallCharges.Calls">
-                <td>{{call.Called}}</td>
-                <td>{{call.duration}}</td>
-                <td>{{call.Cost}}</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td class="text-info">Total : {{Bill.SkyStore.Total}}</td>
-            </tr>
-        </table>
+        <div id="bill">
+            <button class="btn-info" data-toggle="collapse" data-target="#packages">Packages </button>
+            <table class="table collapse" id="packages">
+                <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Cost</th>
+                </tr>
+                <tr ng-repeat="subscription in  Bill.Package.Subscriptions">
+                    <td>{{subscription.Type}}</td>
+                    <td>{{subscription.Name}}</td>
+                    <td>{{subscription.Cost}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="text-info">Total : {{Bill.Package.Total}}</td>
+                </tr>
+            </table>
+            <button class="btn-info" data-toggle="collapse" data-target="#CallCharges">Call Charges </button>
+            <table class="table collapse" id="CallCharges">
+                <tr>
+                    <th>Called</th>
+                    <th>Duration</th>
+                    <th>Cost</th>
+                </tr>
+                <tr ng-repeat="call in  Bill.CallCharges.Calls">
+                    <td>{{call.Called}}</td>
+                    <td>{{call.duration}}</td>
+                    <td>{{call.Cost}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="text-info">Total : {{Bill.SkyStore.Total}}</td>
+                </tr>
+            </table>
 
-        <span class="bg-info">Sky Store</span>
-        <table class="table" id="Store">
-            <tr>
-                <th>Title</th>
-                <th>Cost</th>
-                <th>Rental Type</th>
-            </tr>
-            <tr ng-repeat="rental in  Bill.SkyStore.Rentals">
-                <td>{{rental.Title}}</td>
-                <td>{{rental.Cost}}</td>
-                <td>Rental</td>
-            </tr>
-            <tr ng-repeat="rental in  Bill.SkyStore.BuyAndKeep">
-                <td>{{rental.Title}}</td>
-                <td>{{rental.Cost}}</td>
-                <td>Buy And Keep</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td class="text-info">Total : {{Bill.CallCharges.Total}}</td>
-            </tr>
-        </table>
+            <button class="btn-info" data-toggle="collapse" data-target="#Store">Sky Store </button>
+            <table class="table collapse" id="Store">
+                <tr>
+                    <th>Title</th>
+                    <th>Cost</th>
+                    <th>Rental Type</th>
+                </tr>
+                <tr ng-repeat="rental in  Bill.SkyStore.Rentals">
+                    <td>{{rental.Title}}</td>
+                    <td>{{rental.Cost}}</td>
+                    <td>Rental</td>
+                </tr>
+                <tr ng-repeat="rental in  Bill.SkyStore.BuyAndKeep">
+                    <td>{{rental.Title}}</td>
+                    <td>{{rental.Cost}}</td>
+                    <td>Buy And Keep</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="text-info">Total : {{Bill.CallCharges.Total}}</td>
+                </tr>
+            </table>
+        </div>
     </div>
 
 </body>
 
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 <script>
