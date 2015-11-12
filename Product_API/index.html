@@ -4,11 +4,34 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
     <!-- Optional theme -->
+    <link rel="stylesheet" href="http://css-spinners.com/css/spinner/pulse.css" type="text/css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+    <style>
+        #pluswrap {
+            position: fixed;
+            width: 100%;
+            height:100%;
+            display: flex;
+            align-items: center;
+             background: rgba(0, 0, 0, 0.91);
+            top: 0;
+            }
+
+            .plus {
+              display: flex;
+              margin: 0 auto;
+              color:white;
+            }
+    </style>
 </head>
 <body ng-app="BillApp" ng-controller="BillController">
     <nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
+            <div id="pluswrap" ng-hide="Bill">
+                <div class="plus pulse-loader">
+                    Loading...
+                </div>
+            </div>
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -18,7 +41,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Your Sky Bill<img style="width:30%;height:30%;" src="http://ktvservices.com/wp-content/uploads/2013/09/Sky-logo-2012-lrg.jpg" /></a>
+                <a class="navbar-brand" target="_blank" href="http://www.sky.com"><img style="width:80%;height:82%;" src="http://ktvservices.com/wp-content/uploads/2013/09/Sky-logo-2012-lrg.jpg" />Your Sky Bill</a>
             </div>
         </div>
 </nav>
@@ -28,7 +51,7 @@
         <h4>Total : {{Bill.Total}}</h4>
         <div id="bill">
             <button class="btn-info" data-toggle="collapse" data-target="#packages">Packages </button>
-            <table class="table collapse" id="packages">
+            <table class="table collapse in" id="packages">
                 <tr>
                     <th>Type</th>
                     <th>Name</th>
