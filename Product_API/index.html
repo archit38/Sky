@@ -13,7 +13,8 @@
             height:100%;
             display: flex;
             align-items: center;
-             background: rgba(0, 0, 0, 0.91);
+            background: rgba(0, 0, 0, 0.91);
+            z-index: 10;
             top: 0;
             }
 
@@ -22,6 +23,10 @@
               margin: 0 auto;
               color:white;
             }
+
+            body {
+                   background:wheat !important;
+                }
     </style>
 </head>
 <body ng-app="BillApp" ng-controller="BillController">
@@ -41,76 +46,87 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" target="_blank" href="http://www.sky.com"><img style="width:80%;height:82%;" src="http://ktvservices.com/wp-content/uploads/2013/09/Sky-logo-2012-lrg.jpg" />Your Sky Bill</a>
+                <a class="navbar-brand" target="_blank" href="http://www.sky.com"><img id="9" class="img" style="max-height: none ! important; max-width: none ! important; height: 80%; width: 80%;" alt="Sky " src="http://www.roberthollingworth.co.uk/wp-content/uploads/photo-gallery/Logos/thumb/Sky_UK.png">Your Sky Bill</a>
             </div>
         </div>
 </nav>
     <div>
-        <h4 class="info">Period : {{formatDate(Bill.Statement.Period.From)}} - {{formatDate(Bill.Statement.Period.To)}}</h4>
-        <h6>Date Generated : {{formatDate(Bill.Statement.Generated)}}</h6>
-        <h4>Total : {{Bill.Total}}</h4>
-        <div id="bill">
-            <button class="btn-info" data-toggle="collapse" data-target="#packages">Packages </button>
-            <table class="table collapse in" id="packages">
-                <tr>
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Cost</th>
-                </tr>
-                <tr ng-repeat="subscription in  Bill.Package.Subscriptions">
-                    <td>{{subscription.Type}}</td>
-                    <td>{{subscription.Name}}</td>
-                    <td>{{subscription.Cost}}</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td class="text-info">Total : {{Bill.Package.Total}}</td>
-                </tr>
-            </table>
-            <button class="btn-info" data-toggle="collapse" data-target="#CallCharges">Call Charges </button>
-            <table class="table collapse" id="CallCharges">
-                <tr>
-                    <th>Called</th>
-                    <th>Duration</th>
-                    <th>Cost</th>
-                </tr>
-                <tr ng-repeat="call in  Bill.CallCharges.Calls">
-                    <td>{{call.Called}}</td>
-                    <td>{{call.duration}}</td>
-                    <td>{{call.Cost}}</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td class="text-info">Total : {{Bill.SkyStore.Total}}</td>
-                </tr>
-            </table>
-
-            <button class="btn-info" data-toggle="collapse" data-target="#Store">Sky Store </button>
-            <table class="table collapse" id="Store">
-                <tr>
-                    <th>Title</th>
-                    <th>Cost</th>
-                    <th>Rental Type</th>
-                </tr>
-                <tr ng-repeat="rental in  Bill.SkyStore.Rentals">
-                    <td>{{rental.Title}}</td>
-                    <td>{{rental.Cost}}</td>
-                    <td>Rental</td>
-                </tr>
-                <tr ng-repeat="rental in  Bill.SkyStore.BuyAndKeep">
-                    <td>{{rental.Title}}</td>
-                    <td>{{rental.Cost}}</td>
-                    <td>Buy And Keep</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td class="text-info">Total : {{Bill.CallCharges.Total}}</td>
-                </tr>
-            </table>
-        </div>
+        <h6 class="col-xs-6">Date Generated : {{formatDate(Bill.Statement.Generated)}}</h6>
+        <h5 class="bg-info col-xs-6">Please pay by : {{formatDate(Bill.Statement.Due)}}</h5>
+    </div>
+    <div class="container-fluid">
+        <h4 class="bg-info col-xs-6">Period : {{formatDate(Bill.Statement.Period.From)}} - {{formatDate(Bill.Statement.Period.To)}}</h4>
+        <h4 class="bg-info col-xs-6">Total To Pay : {{Bill.Total}}</h4>
+    </div>
+    <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
+        <div id="bill container-fluid">
+            <div class="col-xs-4">
+                <button class="btn-info" data-toggle="collapse" data-target="#packages">Packages </button>
+                <table class="table table-striped collapse in" id="packages">
+                    <tr>
+                        <th class="col-md-4">Type</th>
+                        <th class="col-md-4">Name</th>
+                        <th class="col-md-3">Cost</th>
+                    </tr>
+                    <tr ng-repeat="subscription in  Bill.Package.Subscriptions">
+                        <td>{{subscription.Type}}</td>
+                        <td>{{subscription.Name}}</td>
+                        <td>{{subscription.Cost}}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td class="text-info">Total : {{Bill.Package.Total}}</td>
+                    </tr>
+                </table>
+            </div>
+              
+                <div class="col-xs-4">
+                    <button class="btn-info" data-toggle="collapse" data-target="#CallCharges">Call Charges </button>
+                    <table class="table table-striped collapse in" id="CallCharges">
+                        <tr>
+                            <th>Called</th>
+                            <th>Duration</th>
+                            <th>Cost</th>
+                        </tr>
+                        <tr ng-repeat="call in  Bill.CallCharges.Calls">
+                            <td>{{call.Called}}</td>
+                            <td>{{call.duration}}</td>
+                            <td>{{call.Cost}}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="text-info">Total : {{Bill.SkyStore.Total}}</td>
+                        </tr>
+                    </table>
+                </div>
+                   
+                    <div class="col-xs-4">
+                        <button class="btn-info" data-toggle="collapse" data-target="#Store">Sky Store </button>
+                        <table class="table table-striped collapse in" id="Store">
+                            <tr>
+                                <th>Title</th>
+                                <th>Cost</th>
+                                <th>Rental Type</th>
+                            </tr>
+                            <tr ng-repeat="rental in  Bill.SkyStore.Rentals">
+                                <td>{{rental.Title}}</td>
+                                <td>{{rental.Cost}}</td>
+                                <td>Rental</td>
+                            </tr>
+                            <tr ng-repeat="rental in  Bill.SkyStore.BuyAndKeep">
+                                <td>{{rental.Title}}</td>
+                                <td>{{rental.Cost}}</td>
+                                <td>Buy And Keep</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td class="text-info">Total : {{Bill.CallCharges.Total}}</td>
+                            </tr>
+                        </table>
+                    </div>
     </div>
 
 </body>

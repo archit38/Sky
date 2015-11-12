@@ -15,15 +15,15 @@ namespace Bill.Controllers
         public readonly string URL = "http://safe-plains-5453.herokuapp.com/bill.json";
 
         [HttpGet]
-        public HttpResponseMessage GetBill()
+        public IHttpActionResult GetBill()
         {
             using (WebClient client = new WebClient())
             {
                 string billJson = client.DownloadString(URL);
                 var bill = JsonConvert.DeserializeObject<Bill.Models.Bill>(billJson);
                 if (bill == null)
-                    return Request.CreateResponse(HttpStatusCode.NotFound);
-                return Request.CreateResponse(HttpStatusCode.OK, bill);     
+                    return NotFound();
+                return Ok(bill);     
             }
         }
     }
